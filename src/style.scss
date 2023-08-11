@@ -1,0 +1,46 @@
+$multiplier: 1;
+$sunsize: 20 * $multiplier;
+$planetsize: 10 * $multiplier;
+$orbitdistance: 40 * $multiplier;
+$speed: 2.2;
+
+html, body {
+  font-size: .25vw;
+  background-color: #000;
+  height: 100%;
+  overflow: hidden;
+  #oneplus {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    width: $sunsize * 1rem;
+    height: $sunsize * 1rem;
+    background-color: #f00;
+    border-radius: $sunsize * 1rem;
+    &::after, &::before {
+      content: '';
+      position: absolute;
+      width: $planetsize * 1rem;
+      height: $planetsize * 1rem;
+      border-radius: $planetsize * 1rem;
+      background-color: #fff;
+      margin-left: ($sunsize - ($planetsize)) * 0.5rem;
+      top: ($orbitdistance - $planetsize) * -1rem;
+      transform-origin: 50% ($orbitdistance - $planetsize + ($sunsize * 0.5)) * 1rem;
+      animation: spin $speed * 1s cubic-bezier(0.86, 0, 0.07, 1) infinite;
+    }
+    &::before {
+      animation-delay: $speed * -0.5s;
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
